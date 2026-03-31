@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rising Riverton Silverwolves</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --wolf-red: #5B2D8E;
+    --wolf-dark: #0D0D0D;
+    --wolf-gold: #C0C0C0;
+    --wolf-off: #F4F4F6;
+    --wolf-mid: #2A2A2A;
+    --wolf-muted: #7A7A7A;
+    --wolf-light: #FFFFFF;
+    --wolf-elem: #3B1A6B;
+    --wolf-comp: #1A1A2E;
+    --wolf-silver: #C0C0C0;
+    --wolf-purple: #5B2D8E;
+    --wolf-purple-light: #7B4DB8;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--wolf-off);
+    color: var(--wolf-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--wolf-dark);
+    color: var(--wolf-light);
+    padding: 72px 40px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 480px; height: 480px;
+    border-radius: 50%;
+    background: var(--wolf-purple);
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: var(--wolf-silver);
+    opacity: 0.06;
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--wolf-silver);
+    margin-bottom: 20px;
+  }
+  .hero-eyebrow span.dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--wolf-silver);
+    display: inline-block;
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 14vw, 130px);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--wolf-light);
+  }
+  h1 span.accent {
+    color: var(--wolf-purple-light);
+  }
+  .hero-tagline {
+    margin-top: 20px;
+    font-size: 17px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+  .hero-cta {
+    display: inline-block;
+    margin-top: 36px;
+    padding: 16px 40px;
+    background: var(--wolf-purple);
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .hero-cta:hover { background: var(--wolf-purple-light); transform: translateY(-2px); }
+
+  /* ── ABOUT STRIP ── */
+  .about-strip {
+    background: var(--wolf-purple);
+    color: #fff;
+    padding: 28px 40px;
+  }
+  .about-strip p {
+    max-width: 860px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.7;
+    font-weight: 300;
+    text-align: center;
+  }
+  .about-strip strong { font-weight: 600; }
+
+  /* ── PROGRAMS ── */
+  .programs {
+    padding: 72px 40px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--wolf-muted);
+    margin-bottom: 36px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.3;
+  }
+  .program-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 680px) { .program-grid { grid-template-columns: 1fr; } }
+
+  .program-card {
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .program-card.elem { background: var(--wolf-elem); color: #fff; }
+  .program-card.comp { background: var(--wolf-comp); color: #fff; }
+
+  .card-header {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .card-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.15);
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    line-height: 1;
+    letter-spacing: 0.03em;
+  }
+  .card-subtitle {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 300;
+    opacity: 0.75;
+    line-height: 1.5;
+  }
+  .card-body {
+    padding: 24px 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .info-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .info-icon {
+    width: 28px; height: 28px;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.12);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    margin-top: 1px;
+  }
+  .info-text { font-size: 13.5px; line-height: 1.55; }
+  .info-text strong { font-weight: 600; display: block; margin-bottom: 2px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.6; }
+
+  .card-price {
+    margin-top: auto;
+    padding: 18px 28px;
+    background: rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .price-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.6; }
+  .price-val { font-family: 'Bebas Neue', sans-serif; font-size: 40px; line-height: 1; }
+  .price-note { font-size: 11px; opacity: 0.55; margin-top: 2px; }
+
+  /* ── MEETS TABLE ── */
+  .meets-section {
+    background: var(--wolf-dark);
+    color: var(--wolf-light);
+    padding: 64px 40px;
+  }
+  .meets-inner { max-width: 960px; margin: 0 auto; }
+  .meets-section .section-label { color: rgba(255,255,255,0.35); }
+  .meets-section .section-label::after { background: rgba(255,255,255,0.2); opacity: 1; }
+
+  .meets-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 8px;
+  }
+  @media (max-width: 680px) { .meets-grid { grid-template-columns: 1fr; } }
+
+  .meets-col-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    color: var(--wolf-silver);
+    margin-bottom: 16px;
+  }
+  .meet-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .meet-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    line-height: 1;
+    color: var(--wolf-purple-light);
+    flex-shrink: 0;
+    width: 28px;
+  }
+  .meet-details { font-size: 13px; line-height: 1.55; }
+  .meet-details strong { font-weight: 600; color: #fff; }
+  .meet-details span { opacity: 0.5; }
+  .usatf-note {
+    margin-top: 14px;
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.38);
+    line-height: 1.6;
+  }
+
+  /* ── EVENTS PILLS ── */
+  .events-section {
+    padding: 64px 40px;
+    background: var(--wolf-off);
+  }
+  .events-inner { max-width: 960px; margin: 0 auto; }
+  .events-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 8px;
+  }
+  @media (max-width: 680px) { .events-grid { grid-template-columns: 1fr; } }
+  .events-col-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    color: var(--wolf-dark);
+    margin-bottom: 14px;
+  }
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pill {
+    padding: 6px 14px;
+    border-radius: 2px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .pill.elem-pill { background: rgba(91,45,142,0.1); color: var(--wolf-purple); border: 1px solid rgba(91,45,142,0.25); }
+  .pill.comp-pill { background: rgba(26,26,46,0.08); color: #2a2a4a; border: 1px solid rgba(26,26,46,0.2); }
+
+  /* ── FOOTER CONTACT ── */
+  .footer {
+    background: linear-gradient(135deg, #1a0a2e 0%, #2d1060 100%);
+    padding: 48px 40px;
+  }
+  .footer-left h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 0.04em;
+    color: var(--wolf-silver);
+    line-height: 1;
+  }
+  .footer-left p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+  }
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: right;
+  }
+  .footer-right a {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+  }
+  .footer-right a:hover { border-color: var(--wolf-silver); color: var(--wolf-silver); }
+  .footer-contact-label {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    font-weight: 600;
+  }
+
+  /* animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner > * { animation: fadeUp 0.6s ease both; }
+  .hero-eyebrow  { animation-delay: 0.05s; }
+  h1             { animation-delay: 0.15s; }
+  .hero-tagline  { animation-delay: 0.25s; }
+  .hero-cta      { animation-delay: 0.35s; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span> Riverton, UT · Riverton Silverwolves · Spring 2026</div>
+    <h1>RISING<br><span class="accent">SILVER</span>WOLVES</h1>
+    <p class="hero-tagline">"Let's Rise Together"</p>
+    <a class="hero-cta" href="https://jordansdut.schoolwindow.com/captcha.html?requested_page=%2Festore%2Frhs%2Fcampsclinics.html%3Fview%3Dgrid" target="_blank">⇨ Register Now ⇦</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div class="about-strip">
+  <p>Rising Wolves is a youth track team designed to <strong>build confidence</strong>, teach athletic principles, and focus on <strong>individual improvement</strong> — all while having fun. Two programs are available for different ages and experience levels.</p>
+</div>
+
+<!-- PROGRAMS -->
+<section class="programs">
+  <div class="section-label">Programs</div>
+  <div class="program-grid">
+
+    <!-- ELEMENTARY -->
+    <div class="program-card elem">
+      <div class="card-header">
+        <div class="card-badge">Ages K – 6th Grade</div>
+        <div class="card-title">Elementary Program</div>
+        <div class="card-subtitle">6-week intro to track & field — beginners & intermediates welcome</div>
+      </div>
+      <div class="card-body">
+        <div class="info-row">
+          <div class="info-icon">📅</div>
+          <div class="info-text"><strong>Season</strong>April 13 – May 22</div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">⏰</div>
+          <div class="info-text"><strong>Schedule</strong>M / TH · 5:30 – 6:30 PM</div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div class="info-text"><strong>Location</strong>RHS Track</div>
+        </div>
+      </div>
+      <div class="card-price">
+        <div>
+          <div class="price-label">Cost</div>
+          <div class="price-note">Includes tech tee + meets</div>
+        </div>
+        <div class="price-val">$150</div>
+      </div>
+    </div>
+
+    <!-- COMPETITION -->
+    <div class="program-card comp">
+      <div class="card-header">
+        <div class="card-badge">Ages 10 – 14</div>
+        <div class="card-title">Competition Program</div>
+        <div class="card-subtitle">11-week program — foundational to advanced technique, prep for high school athletics</div>
+      </div>
+      <div class="card-body">
+        <div class="info-row">
+          <div class="info-icon">📅</div>
+          <div class="info-text"><strong>Season</strong>April 13 – June 27</div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">⏰</div>
+          <div class="info-text"><strong>Schedule</strong>M / TH · 5:30 – 6:45 PM</div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div class="info-text"><strong>Location</strong>RHS Track</div>
+        </div>
+      </div>
+      <div class="card-price">
+        <div>
+          <div class="price-label">Cost</div>
+          <div class="price-note">Includes jersey + listed meets</div>
+        </div>
+        <div class="price-val">$200</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events-section">
+  <div class="events-inner">
+    <div class="section-label">Events Offered</div>
+    <div class="events-grid">
+      <div>
+        <div class="events-col-title">Elementary Program</div>
+        <div class="pills">
+          <span class="pill elem-pill">🏃 Distance</span>
+          <span class="pill elem-pill">💨 Sprints</span>
+          <span class="pill elem-pill">↔️ Standing Long Jump</span>
+          <span class="pill elem-pill">🥎 Softball Throw</span>
+          <span class="pill elem-pill">🏹 Turbo Javelin</span>
+        </div>
+      </div>
+      <div>
+        <div class="events-col-title">Competition Program</div>
+        <div class="pills">
+          <span class="pill comp-pill">🏃 Distance</span>
+          <span class="pill comp-pill">💨 Sprints</span>
+          <span class="pill comp-pill">🚧 Hurdles</span>
+          <span class="pill comp-pill">↔️ Long Jump</span>
+          <span class="pill comp-pill">📏 High Jump</span>
+          <span class="pill comp-pill">🔁 Relays</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEETS -->
+<section class="meets-section">
+  <div class="meets-inner">
+    <div class="section-label">Meet Schedule</div>
+    <div class="meets-grid">
+
+      <div>
+        <div class="meets-col-title">Elementary</div>
+        <div class="meet-item">
+          <div class="meet-num">1</div>
+          <div class="meet-details"><strong>TBD</strong><span></span></div>
+        </div>
+        <div class="meet-item">
+          <div class="meet-num">2</div>
+          <div class="meet-details"><strong>May 9 · 1:30 PM</strong><span><br>Davis High School (with Race Cats)</span></div>
+        </div>
+        <div class="meet-item">
+          <div class="meet-num">3</div>
+          <div class="meet-details"><strong>May 22 · 4:30 PM</strong><span><br>Intersquad Meet @ RHS</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="meets-col-title">Competition</div>
+        <div class="meet-item">
+          <div class="meet-num">1</div>
+          <div class="meet-details"><strong>May 9 · 4:00 PM</strong><span><br>Davis High School (with Race Cats)</span></div>
+        </div>
+        <div class="meet-item">
+          <div class="meet-num">2</div>
+          <div class="meet-details"><strong>May 22 · 4:30 PM</strong><span><br>Intersquad Meet @ RHS</span></div>
+        </div>
+        <div class="meet-item">
+          <div class="meet-num">3</div>
+          <div class="meet-details"><strong>May 30 ★ USATF</strong><span><br>Corner Canyon High School</span></div>
+        </div>
+        <div class="meet-item">
+          <div class="meet-num">4</div>
+          <div class="meet-details"><strong>June 6 ★ USATF</strong><span><br>Tony Glover Memorial @ Timpanogos</span></div>
+        </div>
+        <div class="meet-item">
+          <div class="meet-num">5</div>
+          <div class="meet-details"><strong>June 25–27 ★ USATF State</strong><span><br>Location TBD</span></div>
+        </div>
+        <p class="usatf-note">★ USATF meets require a one-time annual membership (~$30) plus a per-event fee of ~$3–$8. Meets subject to change.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER / CONTACT -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <h3>Questions? Contact Us.</h3>
+      <p>McKayla Walker · Rising Wolves Coordinator</p>
+    </div>
+    <div class="footer-right">
+      <span class="footer-contact-label">Email</span>
+      <a href="mailto:mckaylam1113@gmail.com">mckaylam1113@gmail.com</a>
+      <span class="footer-contact-label" style="margin-top:10px;">Phone</span>
+      <a href="tel:8016710585">801-671-0585</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
